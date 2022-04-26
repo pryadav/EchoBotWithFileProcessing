@@ -29,7 +29,7 @@ class ProactiveBot(ActivityHandler):
                 )
 
     async def on_message_activity(self, turn_context: TurnContext):
-        if turn_context.activity.attachments != None:
+        if turn_context.activity.attachments != None and turn_context.activity.attachments[0].content_type !=  'text/html':
             #kick off processing if file, read the content of pdf(example logic app)
             asyncio.ensure_future(self.process_file(turn_context)) #fire and forget
             return await turn_context.send_activity(f"File is getting processed")
